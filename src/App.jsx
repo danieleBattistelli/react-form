@@ -23,8 +23,6 @@ function App() {
     setArticles(newArticles);
   };
 
-
-
   return (
     <>
       <div className="container mt-3">
@@ -55,13 +53,25 @@ function App() {
             <label htmlFor="author">Autore dell'articolo</label>
             <input type="text" className="form-control" id="author"
               value={author}
-              onChange={(e) => setAuthor(e.target.value)} />
+              onChange={(e) => setAuthor(e.target.value)}
+            />
           </div>
-          <button type="submit" className="btn btn-primary mt-2">Aggiungi Articolo</button>
-        </form> <ul className="list-group mt-3"> {articles.map((article, index) => (
-          <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-            <div> <h5>{article.title}</h5> <p>Stato: {article.status}</p> <p>Autore: {article.author}</p> </div>
-            <FaTrash onClick={() => handleDelete(index)} style={{ cursor: 'pointer' }} />
+          <button type="submit" className={`btn btn-success 
+            ${(!status || !title || !author) && 'disabled'}`}>
+            Aggiungi Articolo
+          </button>
+        </form>
+        <ul className="list-group mt-3"> {articles.map((article, index) => (
+          <li key={index}
+            className="list-group-item d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <h5>{article.title}</h5>
+              <p>Stato: {article.status}</p>
+              <p>Autore: {article.author}</p>
+            </div>
+            <FaTrash onClick={() => handleDelete(index)} style={{ cursor: 'pointer' }}
+            />
           </li>
         ))}
         </ul>
